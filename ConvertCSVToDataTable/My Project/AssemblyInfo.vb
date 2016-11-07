@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("ConvertCSVToDataTable")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("Microsoft")>
-<Assembly: AssemblyProduct("ConvertCSVToDataTable")>
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2016")>
+<Assembly: AssemblyTitle("Convert CSV And Fix Cartesian Product")>
+<Assembly: AssemblyDescription("Converts CSV to DataTable and Combines Cartesian Product")>
+<Assembly: AssemblyCompany("SystemMake")>
+<Assembly: AssemblyProduct("Convert CSV And Fix Cartesian Product")>
+<Assembly: AssemblyCopyright("Copyright © SystemMake 2016")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
