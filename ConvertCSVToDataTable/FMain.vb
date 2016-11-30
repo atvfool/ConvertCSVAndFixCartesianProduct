@@ -395,8 +395,8 @@ Public Class FMain
 				Dim worksheet As Excel.Worksheet
 				Dim workbook As Excel.Workbook
 
-				workbook = APP.Workbooks.Open(sfdFile.FileName)
-				worksheet = workbook.Worksheets("Sheet 1")
+				workbook = APP.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet)
+				worksheet = workbook.Worksheets(1)
 
 				'Export Header Names Start
 				Dim columnsCount As Integer = dgvData.Columns.Count
@@ -407,13 +407,13 @@ Public Class FMain
 				'Export Each Row Start
 				For i As Integer = 0 To dgvData.Rows.Count - 1
 					Dim columnIndex As Integer = 0
-					Do Until columnIndex = columnsCount
+					Do Until columnIndex = columnsCount - 1
 						worksheet.Cells(i + 2, columnIndex + 1).Value = dgvData.Item(columnIndex, i).Value.ToString
 						columnIndex += 1
 					Loop
 				Next
 
-				workbook.Save()
+				workbook.SaveAs(sfdFile.FileName)
 				workbook.Close()
 				APP.Quit()
 
