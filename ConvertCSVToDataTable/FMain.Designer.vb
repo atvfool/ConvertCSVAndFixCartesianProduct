@@ -30,11 +30,15 @@ Partial Class FMain
 		Me.mnuMain = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.CSVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ofdCSVFile = New System.Windows.Forms.OpenFileDialog()
 		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
 		Me.dgvData = New System.Windows.Forms.DataGridView()
+		Me.sfdFile = New System.Windows.Forms.SaveFileDialog()
+		Me.ExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.GroupBox1.SuspendLayout()
 		Me.mnuMain.SuspendLayout()
 		Me.GroupBox2.SuspendLayout()
@@ -94,7 +98,7 @@ Partial Class FMain
 		'
 		'mnuMain
 		'
-		Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.HelpToolStripMenuItem})
+		Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ExportToolStripMenuItem, Me.HelpToolStripMenuItem})
 		Me.mnuMain.Location = New System.Drawing.Point(0, 0)
 		Me.mnuMain.Name = "mnuMain"
 		Me.mnuMain.Size = New System.Drawing.Size(735, 24)
@@ -111,8 +115,21 @@ Partial Class FMain
 		'ExitToolStripMenuItem
 		'
 		Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-		Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
 		Me.ExitToolStripMenuItem.Text = "Exit"
+		'
+		'ExportToolStripMenuItem
+		'
+		Me.ExportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CSVToolStripMenuItem, Me.ExcelToolStripMenuItem})
+		Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
+		Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+		Me.ExportToolStripMenuItem.Text = "Export"
+		'
+		'CSVToolStripMenuItem
+		'
+		Me.CSVToolStripMenuItem.Name = "CSVToolStripMenuItem"
+		Me.CSVToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.CSVToolStripMenuItem.Text = "CSV"
 		'
 		'HelpToolStripMenuItem
 		'
@@ -124,7 +141,7 @@ Partial Class FMain
 		'AboutToolStripMenuItem
 		'
 		Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-		Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
 		Me.AboutToolStripMenuItem.Text = "About"
 		'
 		'ofdCSVFile
@@ -151,6 +168,18 @@ Partial Class FMain
 		Me.dgvData.Name = "dgvData"
 		Me.dgvData.Size = New System.Drawing.Size(729, 461)
 		Me.dgvData.TabIndex = 0
+		'
+		'sfdFile
+		'
+		Me.sfdFile.DefaultExt = "*.csv"
+		Me.sfdFile.FileName = "New Document.csv"
+		Me.sfdFile.Filter = """Comma Seperated Values|*.csv"""
+		'
+		'ExcelToolStripMenuItem
+		'
+		Me.ExcelToolStripMenuItem.Name = "ExcelToolStripMenuItem"
+		Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.ExcelToolStripMenuItem.Text = "Excel"
 		'
 		'FMain
 		'
@@ -188,4 +217,8 @@ Partial Class FMain
 	Friend WithEvents ofdCSVFile As OpenFileDialog
 	Friend WithEvents GroupBox2 As GroupBox
 	Friend WithEvents dgvData As DataGridView
+	Friend WithEvents ExportToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents CSVToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents sfdFile As SaveFileDialog
+	Friend WithEvents ExcelToolStripMenuItem As ToolStripMenuItem
 End Class

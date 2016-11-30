@@ -62,6 +62,7 @@ Public Class DCombineRowsColumnPicker
 
 			d_sdColumn.Add("Join", cmbColumnToJoin.SelectedItem)
 			d_sdColumn.Add("Combine", cmbColumnToCombine.SelectedItem)
+			d_sdColumn.Add("Delimiter", cmbDuplicateDelimiter.Text)
 
 		Catch excError As Exception
 			MessageBox.Show(excError.ToString)

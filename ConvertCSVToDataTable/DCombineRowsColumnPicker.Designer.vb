@@ -28,12 +28,14 @@ Partial Class DCombineRowsColumnPicker
 		Me.cmbColumnToJoin = New System.Windows.Forms.ComboBox()
 		Me.cmbColumnToCombine = New System.Windows.Forms.ComboBox()
 		Me.Label2 = New System.Windows.Forms.Label()
+		Me.cmbDuplicateDelimiter = New System.Windows.Forms.ComboBox()
+		Me.Label3 = New System.Windows.Forms.Label()
 		Me.SuspendLayout()
 		'
 		'btnOK
 		'
 		Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-		Me.btnOK.Location = New System.Drawing.Point(12, 112)
+		Me.btnOK.Location = New System.Drawing.Point(12, 161)
 		Me.btnOK.Name = "btnOK"
 		Me.btnOK.Size = New System.Drawing.Size(75, 23)
 		Me.btnOK.TabIndex = 0
@@ -43,7 +45,7 @@ Partial Class DCombineRowsColumnPicker
 		'btnCancel
 		'
 		Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-		Me.btnCancel.Location = New System.Drawing.Point(93, 112)
+		Me.btnCancel.Location = New System.Drawing.Point(93, 161)
 		Me.btnCancel.Name = "btnCancel"
 		Me.btnCancel.Size = New System.Drawing.Size(75, 23)
 		Me.btnCancel.TabIndex = 1
@@ -86,14 +88,34 @@ Partial Class DCombineRowsColumnPicker
 		Me.Label2.TabIndex = 4
 		Me.Label2.Text = "Column To Combine"
 		'
+		'cmbDuplicateDelimiter
+		'
+		Me.cmbDuplicateDelimiter.FormattingEnabled = True
+		Me.cmbDuplicateDelimiter.Items.AddRange(New Object() {"(,) Comma", "Tab", "Space"})
+		Me.cmbDuplicateDelimiter.Location = New System.Drawing.Point(12, 134)
+		Me.cmbDuplicateDelimiter.Name = "cmbDuplicateDelimiter"
+		Me.cmbDuplicateDelimiter.Size = New System.Drawing.Size(156, 21)
+		Me.cmbDuplicateDelimiter.TabIndex = 7
+		'
+		'Label3
+		'
+		Me.Label3.AutoSize = True
+		Me.Label3.Location = New System.Drawing.Point(12, 118)
+		Me.Label3.Name = "Label3"
+		Me.Label3.Size = New System.Drawing.Size(95, 13)
+		Me.Label3.TabIndex = 6
+		Me.Label3.Text = "Duplicate Delimiter"
+		'
 		'DCombineRowsColumnPicker
 		'
 		Me.AcceptButton = Me.btnOK
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.btnCancel
-		Me.ClientSize = New System.Drawing.Size(179, 148)
+		Me.ClientSize = New System.Drawing.Size(179, 198)
 		Me.ControlBox = False
+		Me.Controls.Add(Me.cmbDuplicateDelimiter)
+		Me.Controls.Add(Me.Label3)
 		Me.Controls.Add(Me.cmbColumnToCombine)
 		Me.Controls.Add(Me.Label2)
 		Me.Controls.Add(Me.cmbColumnToJoin)
@@ -118,4 +140,6 @@ Partial Class DCombineRowsColumnPicker
 	Friend WithEvents cmbColumnToJoin As ComboBox
 	Friend WithEvents cmbColumnToCombine As ComboBox
 	Friend WithEvents Label2 As Label
+	Friend WithEvents cmbDuplicateDelimiter As ComboBox
+	Friend WithEvents Label3 As Label
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.Specialized
 Imports System.IO
-
+Imports System.Text
+Imports Excel = Microsoft.Office.Interop.Excel
 
 ''' <summary>
 ''' Main Form in program. Opens at application startup
@@ -53,15 +54,53 @@ Public Class FMain
 	''' <param name="e"></param>
 	Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
 
-		FMain_FormClosed(ExitToolStripMenuItem, New EventArgs())
+		Application.Exit()
 
 	End Sub
 
 
+	''' <summary>
+	''' Exports to CSV
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Private Sub CSVToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CSVToolStripMenuItem.Click
+
+		Try
+			ExportToCSV()
+		Catch excError As Exception
+			MessageBox.Show(excError.ToString)
+		End Try
+
+	End Sub
+
+	''' <summary>
+	''' Exports to Excel
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Private Sub ExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelToolStripMenuItem.Click
+
+		Try
+			ExportToExcel()
+		Catch excError As Exception
+			MessageBox.Show(excError.ToString)
+		End Try
+
+	End Sub
+
+
+	''' <summary>
+	''' Displays a form with some information about the program
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
 	Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
 		Try
 
+			Dim frmAbout As New FAbout
 
+			frmAbout.ShowDialog()
 
 		Catch excError As Exception
 			MessageBox.Show(excError.ToString)
@@ -114,7 +153,7 @@ Public Class FMain
 
 				Dim sdColumns As StringDictionary = diaColumnPicker.Columns
 
-				CombineRows(sdColumns("Join"), sdColumns("Combine"))
+				CombineRows(sdColumns("Join"), sdColumns("Combine"), sdColumns("Delimiter"))
 
 			End If
 
@@ -294,5 +333,97 @@ Public Class FMain
 		End Try
 
 	End Sub
+
+
+	''' <summary>
+	''' Exports the datatable to CSV
+	''' </summary>
+	Private Sub ExportToCSV()
+
+		Try
+
+			Me.sfdFile.DefaultExt = "*.csv"
+			Me.sfdFile.FileName = "New Document.csv"
+			Me.sfdFile.Filter = """Comma Seperated Values|*.csv"""
+
+			Dim diaResult As DialogResult = sfdFile.ShowDialog
+
+			If diaResult = DialogResult.OK Then
+
+				Dim sbCSV As New StringBuilder
+				Dim dtData As DataTable = dgvData.DataSource
+
+				For Each drRow As DataRow In dtData.Rows
+
+					For Each Field As Object In drRow.ItemArray
+
+						sbCSV.Append("""" & Field.ToString & """" & ",")
+
+					Next
+
+					sbCSV.Replace(",", vbNewLine, sbCSV.Length - 1, 1)
+
+				Next
+
+				My.Computer.FileSystem.WriteAllText(sfdFile.FileName, sbCSV.ToString, False)
+
+			End If
+
+		Catch excError As Exception
+			MessageBox.Show(excError.ToString)
+		End Try
+
+	End Sub
+
+
+	''' <summary>
+	''' Exports to Excel
+	''' </summary>
+	Private Sub ExportToExcel()
+
+		Try
+
+			Me.sfdFile.DefaultExt = "*.xlsx"
+			Me.sfdFile.FileName = "New Document.xlsx"
+			Me.sfdFile.Filter = """Excel Workbook|*.xlsx"""
+
+			Dim diaResult As DialogResult = sfdFile.ShowDialog
+
+			If diaResult = DialogResult.OK Then
+
+				Dim APP As New Excel.Application
+				Dim worksheet As Excel.Worksheet
+				Dim workbook As Excel.Workbook
+
+				workbook = APP.Workbooks.Open(sfdFile.FileName)
+				worksheet = workbook.Worksheets("Sheet 1")
+
+				'Export Header Names Start
+				Dim columnsCount As Integer = dgvData.Columns.Count
+				For Each column In dgvData.Columns
+					worksheet.Cells(1, column.Index + 1).Value = column.Name
+				Next
+
+				'Export Each Row Start
+				For i As Integer = 0 To dgvData.Rows.Count - 1
+					Dim columnIndex As Integer = 0
+					Do Until columnIndex = columnsCount
+						worksheet.Cells(i + 2, columnIndex + 1).Value = dgvData.Item(columnIndex, i).Value.ToString
+						columnIndex += 1
+					Loop
+				Next
+
+				workbook.Save()
+				workbook.Close()
+				APP.Quit()
+
+			End If
+
+		Catch excError As Exception
+			MessageBox.Show(excError.ToString)
+		End Try
+
+	End Sub
+
 
 End Class
